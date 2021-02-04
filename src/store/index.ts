@@ -10,6 +10,7 @@ modules = modulesFiles.keys().reduce((modules, modulePath) => {
   modules[moduleName] = value.default;
   return modules;
 }, modules);
+console.log(modules);
 
 /** 实现自动加载@modules 下的模块里的router文件夹里的文件 ：要求模块名不能与/store/modules下的文件名重复*/
 const serviceModulesFiles = require.context(

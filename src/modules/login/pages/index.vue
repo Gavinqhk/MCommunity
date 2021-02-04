@@ -100,6 +100,7 @@
     height: 100%;
     .container {
       background-color: #fff;
+      border-radius: 5px;
       width: 800px;
       height: 405px;
       position: fixed;

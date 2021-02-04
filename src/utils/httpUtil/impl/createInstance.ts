@@ -6,6 +6,7 @@ import axios from "axios";
 export function createService(
   httpConfig: HttpConfigInterface
 ): { service: any; request: (option: Record<string | number, any>) => Promise<IResponse> } {
+  const responseHelper = new ResponseHelper(httpConfig.ErrorArray);
   const service = axios.create({
     baseURL: httpConfig.baseURL, // url = base url + request url
     withCredentials: httpConfig.withCredentials, // send cookies when cross-domain requests
@@ -36,7 +37,7 @@ export function createService(
     },
     (error: any) => {
       console.log("request-error:", error.response);
-      const res = ResponseHelper.getResponseFromError(error.response);
+      const res = responseHelper.getResponseFromError(error.response);
       return responseHandler(res);
     }
   );
@@ -44,11 +45,11 @@ export function createService(
   // response interceptor
   service.interceptors.response.use(
     (response: any): any => {
-      const res = ResponseHelper.getResponse(response);
+      const res = responseHelper.getResponse(response);
       return responseHandler(res);
     },
     (error: any) => {
-      const res = ResponseHelper.getResponseFromError(error.response);
+      const res = responseHelper.getResponseFromError(error.response);
       return responseHandler(res);
     }
   );

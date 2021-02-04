@@ -1,8 +1,6 @@
 import { IResponseHelper, IResponse } from "@/utils/httpUtil/interface/ResponseHelper";
 import { isEmpty, isString, walkArray } from "@utils/commonUtil";
 import { CustomError } from "../interface/HttpConfigInterface";
-import HttpConfig from "./HttpConfig";
-const ErrorArray = HttpConfig.ErrorArray;
 
 export class Response implements IResponse {
   code: number;
@@ -34,14 +32,15 @@ export class Response implements IResponse {
     return this;
   }
 }
-function walkErrorArray(handler: any, context?: any): void {
-  walkArray(ErrorArray, handler, context);
-}
 class ResponseHelper implements IResponseHelper {
+  errorArray: Array<{ code: string | number; msg: string }> = [];
+  constructor(errorArray: Array<{ code: string | number; msg: string }>) {
+    this.errorArray = errorArray;
+  }
   public getMessage(res: any): string {
     let msg: string = res.message;
     const code: number = this.getCode(res);
-    walkErrorArray(function (item: CustomError) {
+    walkArray(this.errorArray, function (item: CustomError) {
       if (item.code == code) {
         msg = item.msg;
         return true;
@@ -102,5 +101,4 @@ class ResponseHelper implements IResponseHelper {
     return new Response(code, status, message, data, error);
   }
 }
-const responseHelper = new ResponseHelper();
-export default responseHelper;
+export default ResponseHelper;

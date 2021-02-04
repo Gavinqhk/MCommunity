@@ -1,7 +1,7 @@
 import { CustomRoute } from "@router/types";
 const routes: Array<CustomRoute> = [
   {
-    path: "/",
+    path: "/login",
     name: "login",
     component: (): any => import("@/modules/login/pages/index.vue"),
     meta: {

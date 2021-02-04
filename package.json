@@ -1,9 +1,10 @@
 {
-  "name": "vue2-ts-template",
-  "version": "0.1.0",
+  "name": "MCommunity",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve --mode local",
+    "dev:mock": "vue-cli-service serve --mode mock",
     "build": "vue-cli-service build",
     "build:dev": "vue-cli-service build --mode development",
     "build:test": "vue-cli-service build --mode test",
@@ -59,8 +60,10 @@
     "less": "^3.12.2",
     "less-loader": "^7.0.2",
     "lint-staged": "^10.4.2",
+    "mockjs": "^1.1.0",
     "node-object-hash": "^2.0.0",
     "prettier": "^2.1.2",
+    "sass-loader": "^10.1.1",
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
