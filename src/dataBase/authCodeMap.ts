@@ -2,5 +2,6 @@
 const map = {
   layout: "layout", //骨架
   home: "home", // 首页
+  doctorManage: "doctorManage", // 医生管理
 };
 export default map;

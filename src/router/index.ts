@@ -2,9 +2,14 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import { CustomRoute } from "./types";
 import { createGuard } from "./guard/";
+import { generateMenuRoutes, dynimicRoutes } from "./buildDynimicRoutes";
+import staticRoutes from "./buildStaticRoutes";
+import store from "@/store/index";
 Vue.use(VueRouter);
 
 let routes: Array<CustomRoute> = [];
+routes = routes.concat(dynimicRoutes);
+routes = routes.concat(staticRoutes);
 /** 实现自动加载@modules 下的模块里的router文件夹里的文件 */
 const serviceModulesFiles = require.context(
   "../modules",
@@ -39,3 +44,15 @@ const router = new VueRouter({
 });
 createGuard(router);
 export default router;
+
+/**根据后台的权限模块树生成前端的路由树 */
+export function buildMenuRoutes(visualRoutes: Array<any>) {
+  console.log("visualRoutes:", visualRoutes);
+  const routes = generateMenuRoutes([], visualRoutes);
+  // router.addRoutes(routes);
+  // router.options.routes = routes.concat(staticRoutes);
+  // router.addRoutes([anyRoute]);
+  // router.options.routes.push(anyRoute);
+  // store.commit("setSideMenus", router.options.routes);
+  store.commit("setSideMenus", routes);
+}

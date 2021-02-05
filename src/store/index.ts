@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex, { ModuleTree } from "vuex";
+import main from "./main";
 
 /**加载同级目录下的module里的所有脚本 */
 const modulesFiles = require.context("./modules", true, /\.ts$/);
@@ -10,7 +11,6 @@ modules = modulesFiles.keys().reduce((modules, modulePath) => {
   modules[moduleName] = value.default;
   return modules;
 }, modules);
-console.log(modules);
 
 /** 实现自动加载@modules 下的模块里的router文件夹里的文件 ：要求模块名不能与/store/modules下的文件名重复*/
 const serviceModulesFiles = require.context(
@@ -24,6 +24,12 @@ modules = serviceModulesFiles.keys().reduce((modules, modulePath) => {
   modules[moduleName] = value.default;
   return modules;
 }, modules);
+const store = new Vuex.Store({
+  state: main.state,
+  mutations: main.mutations,
+  actions: main.actions,
+  modules: modules,
+});
 Vue.use(Vuex);
 
 export default new Vuex.Store({

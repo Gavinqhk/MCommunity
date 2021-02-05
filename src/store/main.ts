@@ -1,5 +1,5 @@
 import { setSession, getSession } from "@utils/localStorageUtil";
-import { ls_userInfo } from "@dataBase/localstorageKey";
+import { ls_userInfo } from "@/dataBase/localStorageKeys";
 const userInfo = getSession(ls_userInfo);
 const main = {
   state: {
@@ -11,4 +11,6 @@ const main = {
       state.userInfo = userInfo;
     },
   },
+  actions: {},
 };
+export default main;
