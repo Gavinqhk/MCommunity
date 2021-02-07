@@ -18,4 +18,5 @@ routes = modulesFiles.keys().reduce((routes, modulePath) => {
   routes = routes.concat(value.default);
   return routes;
 }, routes);
+console.log(routes);
 export default routes;

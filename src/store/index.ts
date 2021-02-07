@@ -32,9 +32,4 @@ const store = new Vuex.Store({
 });
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: modules,
-});
+export default store;

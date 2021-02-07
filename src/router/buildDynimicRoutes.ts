@@ -13,7 +13,6 @@ $dynimicRoutes = dynimicServiceModulesFiles.keys().reduce((routes, modulePath) =
   routes = routes.concat(value.default);
   return routes;
 }, $dynimicRoutes);
-
 export const dynimicRoutes = $dynimicRoutes;
 
 function buildRouteMap(
@@ -46,6 +45,7 @@ export const dynimicRouteMap = buildRouteMap({}, $dynimicRoutes, {
   key: "name",
   childKey: "children",
 });
+console.log(dynimicRouteMap);
 export function generateMenuRoutes(container: Array<any>, data: Array<any>) {
   walkArray(data, function (item: any) {
     if (dynimicRouteMap[item.key] && !item.banned) {
