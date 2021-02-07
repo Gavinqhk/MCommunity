@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-container">doctorManage</div>
+  <div class="layout-container">userManage</div>
 </template>
 <script lang="ts">
   import Vue from "vue";
